@@ -1,0 +1,5 @@
+unfinished_game/ - An unfinished game i made in like 2016. Shows a lot about making javascript objects
+and manipulating html with javascript. Also uses requestAnimationFrame().
+
+tv_remote/ - An electron application. shows how to send variables from application to javascript
+running the application. we need to do this to send serial commands at the system level.

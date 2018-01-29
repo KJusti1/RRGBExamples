@@ -1,0 +1,26 @@
+node version:
+
+https://nodejs.org/download/release/v4.1.0/
+
+socket.io version:
+
+3.10.8 - Server
+1.4.5 - Client
+
+listeners:
+
+changeInterface- "0"
+	interface:
+		0 = login screen
+		1 = developers basement
+
+addModel- "1"
+
+addUsersModel- "2"
+
+addMovement- "3"
+
+cancelQueuedMovement- "4"
+
+removeModel- "5"
+

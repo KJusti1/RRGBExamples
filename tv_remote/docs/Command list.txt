@@ -1,0 +1,294 @@
+LG WebOS (new)
+
+Discover
+
+urn:lge-com:service:webos-second-screen:1
+
+Register device
+
+{
+
+    type: ’register’,
+
+    payload: {
+
+       "client-key":"efac5b19aae42241f7b19d192954b591",  //from previous pairing
+
+        manifest: {
+
+            permissions: [
+
+                "LAUNCH",
+
+                "LAUNCH_WEBAPP",
+
+                "APP_TO_APP",
+
+                "CONTROL_AUDIO",
+
+                "CONTROL_INPUT_MEDIA_PLAYBACK",
+
+                "CONTROL_POWER",
+
+                "READ_INSTALLED_APPS",
+
+                "CONTROL_DISPLAY",
+
+                "CONTROL_INPUT_JOYSTICK",
+
+                "CONTROL_INPUT_MEDIA_RECORDING",
+
+                "CONTROL_INPUT_TV",
+
+                "READ_INPUT_DEVICE_LIST",
+
+                "READ_NETWORK_STATE",
+
+                "READ_TV_CHANNEL_LIST",
+
+                "WRITE_NOTIFICATION_TOAST",
+
+                "CONTROL_INPUT_TEXT",
+
+                "CONTROL_MOUSE_AND_KEYBOARD",
+
+                "READ_CURRENT_CHANNEL",
+
+                "READ_RUNNING_APPS"
+
+            ]
+
+        }
+
+    }
+
+}
+
+Response
+
+{
+
+    type:"registered" //device registered
+
+payload: {"client-key":"efac5b19aae42241f7b19d192954b591"}   //safe and use on next register on websocket
+}
+
+or 
+
+{
+
+    type:"error",  
+
+    payload:{errorCode:-100, errorText:"Error description"}
+
+}
+
+Sending command format
+
+{
+
+        type: ’request’,
+
+        id: 1, //some id returned by response
+
+        uri: uri, //api url endpoints
+
+        payload: data || {} //data to send
+
+}
+
+Response
+
+{
+
+    type: "response", //or error if network error occurred
+
+    id:1, //id provided in request
+
+    payload: data //data sent from tv if contains error, then {errorCode:-100, errorText:"Error description"}
+
+}
+
+Example:
+
+Registering: {"type":"register","payload":{"manifest":{"permissions":["LAUNCH","LAUNCH_WEBAPP","APP_TO_APP","CONTROL
+
+_AUDIO","CONTROL_INPUT_MEDIA_PLAYBACK","CONTROL_POWER","READ_INSTALLED_APPS","CONTROL_DISPLAY","CONTROL_INPUT_JOYSTICK","CONTROL_INPUT_MEDIA_RECORDING","CONTROL
+
+_INPUT_TV","READ_INPUT_DEVICE_LIST","READ_NETWORK_STATE","READ_TV_CHANNEL_LIST","WRITE_NOTIFICATION_TOAST","CONTROL_INPUT_TEXT","CONTROL_MOUSE_AND_KEYBOARD","RE
+
+AD_CURRENT_CHANNEL","READ_RUNNING_APPS"]}}}
+
+Register response: {"type":"registered","payload":{"client-key":"4abb1ef1e623fa01b7e40d4cc2f22290"}}
+
+Getting volume: {"type":"request","id":1,"uri":"ssap://audio/getVolume","payload":{}}
+
+Response: {"type":"response","id":1,"payload":{"returnValue":true,"scenario":"mastervolume_tv_speaker","volume":100,"muted":false}}
+
+Setting volume: {"type":"request","id":1,"uri":"ssap://audio/setVolume","payload":{"volume":100}}
+
+Response: {"type":"response","id":1,"payload":{"returnValue":true}}
+
+API URL END POINTS
+
+Apps
+
+FOREGROUND_APP = "ssap://com.webos.applicationManager/getForegroundAppInfo";
+
+APP_STATUS = "ssap://com.webos.service.appstatus/getAppStatus";
+
+APP_STATE = "ssap://system.launcher/getAppState";
+
+APP_LIST = "ssap://com.webos.applicationManager/listApps";
+
+LAUNCH_APP_URI = "ssap://system.launcher/launch";         payload: {"target": url}
+
+CLOSE_APP_URI = "ssap://system.launcher/close";
+
+TV CONTROL
+
+GET_VOLUME = "ssap://audio/getVolume";
+
+Send {} //default sending payload
+
+Response {"returnValue":true,"scenario":"mastervolume_tv_speaker","volume":100,"muted":false}
+
+SET_VOLUME = "ssap://audio/setVolume";
+
+Send {"volume":100}
+
+Response { returnValue: true } //default response payload
+
+VOLUME_UP = "ssap://audio/volumeUp"; //default payloads
+
+VOLUME_DOWN = "ssap://audio/volumeDown"; //default payloads
+
+GET_MUTE = "ssap://audio/getMute";
+
+Response { mute: false, returnValue: true }
+
+SET_MUTE = "ssap://audio/setMute";
+
+Send {"mute": true}
+
+VOLUME_STATUS = "ssap://audio/getStatus";
+
+Response {"returnValue":true,"scenario":"mastervolume_tv_speaker","volume":100,"muted":false}
+
+//unavailable on emulator
+
+CHANNEL_LIST = "ssap://tv/getChannelList"; 
+
+GET_CHANNEL = "ssap://tv/getCurrentChannel";
+
+PROGRAM = "ssap://tv/getChannelProgramInfo";
+
+GET_INPUTS = "ssap://tv/getExternalInputList";
+
+SET_INPUT = "ssap://tv/switchInput";
+
+CHANNEL_UP = "ssap://tv/channelUp"; //default payloads
+
+CHANNEL_DOWN = "ssap://tv/channelDown"; //default payloads
+
+SET_CHANNEL = "ssap://tv/openChannel";
+
+Send {"channelNumber":1} or {"channelId":"someid"}
+
+MEDIA_PLAY = "ssap://media.controls/play";  //default payloads
+
+MEDIA_STOP = "ssap://media.controls/stop";  //default payloads
+
+MEDIA_PAUSE = "ssap://media.controls/pause";  //default payloads
+
+MEDIA_REWIND = "ssap://media.controls/rewind";  //default payloads
+
+MEDIA_FORWARD = "ssap://media.controls/fastForward";  //default payloads
+
+3D_ON = "ssap://com.webos.service.tv.display/set3DOn";  //default payloads
+
+3D_OFF = "ssap://com.webos.service.tv.display/set3DOff";  //default payloads
+
+GET_3D = "ssap://com.webos.service.tv.display/get3DStatus";
+
+Response: { returnValue: true,  status3D: { status: true, pattern: ’2Dto3D’ } }
+
+TURN_OFF = "ssap://system/turnOff"; //default payloads
+
+Other
+
+CLOSE_MEDIA_URI = "ssap://media.viewer/close";
+
+CLOSE_WEBAPP_URI = "ssap://webapp/closeWebApp";
+
+CREATE_TOAST = "palm://system.notifications/createToast";
+
+Mouse Control
+
+GET_SOCKET = "ssap://com.webos.service.networkinput/getPointerInputSocket";
+
+Response { socketPath: ’ws://192.168.2.108:3000/resources/b07444813d7e4b7128990a72d0f4448/netinput.pointer.sock’, returnValue: true }
+
+Connect to provided websocket to control mouse
+
+Mouse commands to send
+
+CLICK = "type:click\n\n";
+
+BUTTON = "type:button\nname:HOME\n\n"; //possible values "HOME", "BACK", "UP", "DOWN", "LEFT", "RIGHT", "3D_MODE"
+
+MOVE = "type:move\ndx:10\ndy:10\ndown:0\n\n";  //down = dragging or not
+
+SCROLL = "type:scroll\ndx:10\ndy:10\n\n";
+
+Text Input
+
+SUBSCRIBE_KEYBOARD = "ssap://com.webos.service.ime/registerRemoteKeyboard";
+
+To subscribe use type subscribe, not request
+
+Response { subscribed: true }
+
+To unsubscribe use type unsubscribe, not request
+
+Response { subscribed: false }
+
+Then when text field is focused and keyboard showed, receives payload
+
+{ currentWidget:
+
+   { autoCapitalizationEnabled: true,
+
+     contentType: ’url’,
+
+     correctionEnabled: false,
+
+     focus: true,
+
+     hiddenText: false,
+
+     predictionEnabled: true },
+
+  focusChanged: true }
+
+  
+
+  When unfocused
+
+  { currentWidget: { focus: false }, focusChanged: true }
+
+  
+
+  WRITE = "ssap://com.webos.service.ime/insertText";
+
+  Send {text:"string", replace:0}
+
+  
+
+  DELETE = "ssap://com.webos.service.ime/deleteCharacters";
+
+  Send {count:10}
+
+  
+
+  ENTER = "ssap://com.webos.service.ime/sendEnterKey"; //default payloads

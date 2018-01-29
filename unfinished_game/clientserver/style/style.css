@@ -1,0 +1,186 @@
+/*
+Author: Kevin Justice
+File: style.css
+Date Created: 092116
+
+Style Sheet
+*/
+@font-face {
+	font-family: "Proggy";
+    src: url(fonts/ProggyCleanSZBP.ttf) format("truetype");
+}
+
+html {
+	font-family: "Proggy";
+	font-size: 12px;
+	padding: 0px;
+	margin: 0px;
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+html:hover {
+	cursor:pointer;
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+	background-color: black;
+}
+
+canvas {
+	display: block;
+}
+
+canvas:hover {
+    cursor: crosshair;
+}
+
+iframe {
+	display: block;
+	margin: auto;
+	border: none;
+}
+
+input {
+	background-color:black;
+	color:white;
+	border-color: white;
+	font-family: "Proggy";
+	font-size: 16px;
+}
+
+button {
+	font-family: "Proggy";
+	font-size: 12px;
+}
+
+li {
+   list-style-type:none;
+}
+
+#ctxtMenuWrapper {
+	position: fixed;
+	background-color: rgba(128,128,128, .75);
+	padding-top:3px;
+	padding-left:3px;
+	padding-right: 3px;
+	padding-bottom: 0px;
+	width:100px;
+}
+
+.ctxtMenuListing {
+	font-size:16px;
+	position: relative;
+	background-color: lightgrey;
+	opacity: 1;
+	margin-bottom: 3px;
+}
+
+.ctxtMenuListing:hover {
+	background-color: grey;
+}
+
+#loginPadding {
+	position: absolute;
+	text-align: center;
+	background-color: white;
+	border-radius: 10px;
+	left:307px; 
+	top:173px;
+	width: 410px;
+	height: 230px;
+}
+
+#loginHeader {
+	background-color: #ffc34d;
+	font-size:16px;
+	white-space: pre;
+}
+
+#loginBox {
+	font-size: 14px;
+	margin-top: 57px;
+	color:black;
+}
+
+#messageBoxShell {
+	position: absolute;
+	background-color:grey;
+	opacity:.75;
+	color:black;
+	font-size:14px;
+	width:400px;
+	height:200px;
+	top: 376px;
+	left:0px;
+}
+
+.optionsBar {
+	position: absolute;
+	text-align: center;
+	background-color: grey;
+	opacity: .6;
+	color:black;
+	font-size: 14px;
+	width:75px;
+	height:16px;
+}
+
+#options_interact {
+	top:0px;
+	left:949px;
+}
+
+#options_backpack {
+	top:16px;
+	left:949px;
+}
+
+#options_interact:hover, #options_backpack:hover {
+	opacity: 1;
+}
+
+#interactions_listWrapper {
+	position: absolute;
+	background-color: rgba(128,128,128, .75);
+	color: black;
+	width:200px;
+	height:400px;
+	top: 176px;
+	left: 824px;
+}
+
+.interactionListing {
+	position: absolute;
+	background-color: lightgrey;
+	opacity: 1;
+	left:3px;
+	width:194px;
+	height:42px;
+}
+
+.interactionListing:hover {
+	box-sizing: border-box;
+	border: 2px solid yellow;
+}
+
+.interactionIcon {
+	position:absolute;
+	top:5px;
+	left:5px;
+	width:32px;
+	height:32px;
+}
+
+.interactionName {
+	position:absolute;
+	text-align: center;
+	font-size:16px;
+	top:14px;
+	left:48px;
+}
